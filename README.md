@@ -13,3 +13,5 @@ Firstly, we download the Shanghai boundary data and POI data from both baidu api
 
 ##### Technologies 
 mapbox, jquery, bootstrap, e-charts. etc
+
+![image](https://raw.githubusercontent.com/liziqun/Js_Final/master/img/app.png)
