@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Spatial Distribution of Urban Facility</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Fullscreen Landscape on iOS -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="main"></div>
+        <div class="titlebar">SPATIAL DISTRIBUTION OF URBAN FACILITY IN SHANGHAI, CHINA</div>
+        <div id="subtitle">@Ziqun Li, Final Project for MUSA-611</div>
+        <div style="text-align:center;padding-top:70px;padding-left:1200px">
+          <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter" style="position:absolute;z-index: 1000;">
+            About This App
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title" id="exampleModalCenterTitle">About This App</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <h5>What is this application for?</h5>
+                <p>This project seeks to evaluate the urban space value for both the urban planner and property developer, and provide a basis for facility site selection.
+                  By using this app, it is possible for the users to find the specific area where certain type of facility are concentrated, and reasonably judge the value of real estate investment.</p>
+                <h5>How to use this app?</h5>
+                <p>The users could get a sense spatial distribution of different types of facility by dragging the slider.
+                   Besides, the users could easily find the total number of different types of facility in the whole city, as well as the relationship between the count of different types of facility in each grid cell through the charts at the bottom.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <script src="src/echarts.js"></script>
+        <script src="src/echarts-gl.min.js"></script>
+        <script src="js/data_basemap.js" ></script>
+        <script src="js/data_table.js" ></script>
+        <script src="js/data_title.js" ></script>
+        <script src="js/settings.js" ></script>
+        <script src="src/mapbox-gl.js"></script>
+        <script src="src/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script>
+
+            var myChart = echarts.init(document.getElementById('main'));
+            mapboxgl.accessToken = mapAccessToken;
+
+            var option = {
+                baseOption:{
+                    visualMap: {
+                        show: true,
+                        calculable:true,
+                        inRange: {
+                            color: colorRamp1
+                        },
+                        outOfRange: {
+                            colorAlpha: 0
+                        },
+                        seriesIndex:0,
+                        left:l,
+                        top:'65%'
+                    },
+                    mapbox: {
+                        center: theCenter,
+                        zoom: theZoom,
+                        pitch: thePitch,
+                        bearing: theBear,
+                        style: mapStyle,
+                        boxHeight: 20,
+                        // altitudeScale: 3e2,
+                        postEffect: {
+                            enable: true,
+                            SSAO: {
+                                enable: true,
+                                radius: 2,
+                                intensity: 1.5
+                            }
+                        },
+                        light: {
+                            main: {
+                                intensity: 0.5,
+                                shadow: theShadow,
+                                shadowQuality: 'high',
+                                alpha: theAlpha,
+                                beta: theBeta
+                            },
+                            ambient: {
+                                intensity: 0.2
+                            },
+                            ambientCubemap: {
+                                texture: '/asset/get/s/data-1491896094618-H1DmP-5px.hdr',
+                                exposure: 1,
+                                diffuseIntensity: 0.5
+                            }
+                        }
+                    },
+                    toolbox:{
+                        itemSize:20,
+                        feature:{
+                            dataZoom:{show:false},
+                            saveAsImage:{show:false},
+                            restore: {show:false},
+                        }
+                    },
+                    timeline:{
+                        axisType:'category',
+                        autoPlay:auto,
+                        playInterval: timestamp,
+                        orient: or,
+                        left: l,
+                        top: t,
+                        width: w,
+                        bottom:b,
+                        data:type,
+                        label:{
+                            color:'white'
+                        },
+                        lineStyle: {
+                            color: '#555'
+                        },
+                        checkpointStyle: {
+                            color: '#537EFF',
+                            borderColor: '#0537CC',
+                            borderWidth: 2
+                        },
+                        controlStyle: {
+                            showNextBtn: false,
+                            showPrevBtn: false,
+                            normal: {
+                                color: '#666',
+                                borderColor: '#666'
+                            },
+                            emphasis: {
+                                color: '#537EFF',
+                                borderColor: '#537EFF'
+                            }
+                        },
+                    },
+                    grid: table_loc,
+                    xAxis: [x1,x2,x3,x4],
+                    yAxis: [y1,y2,y3,y4],
+                    tooltip:{
+                        axisPointer:{
+                            show: true,
+                            type : 'cross',
+                            lineStyle: {
+                                type : 'dashed',
+                                width : 1,
+                                color: 'gray'
+                            }
+                        }
+                    },
+                    series: [
+                        {
+                            type: 'bar3D',
+                            shading: 'realistic',
+                            coordinateSystem: 'mapbox',
+                            bevelSize: barCorner,
+                            barSize:barSize,
+                            itemStyle:{
+                              opacity: theOpac
+                            }
+                        },
+                        table_s1,
+                        table_s2,
+                        table_s3,
+                        table_s4
+
+                    ]
+                },
+                options:dataset
+            };
+
+            myChart.setOption(option);
+
+        </script>
+    </body>
+</html>
