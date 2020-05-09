@@ -1,5 +1,5 @@
 # Spatial Distribution of Urban Facility in Shanghai
-#### Ziqun Li
+### Ziqun Li
 #### Final project for MUSA-611 JavaScript  
 
 ##### What is this application for?
