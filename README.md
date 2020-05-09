@@ -2,7 +2,7 @@
 ### Ziqun Li
 #### Final project for MUSA-611 JavaScript  
   
-To the website, please click:https://liziqun.github.io/Js_Final/map.html  
+https://liziqun.github.io/Js_Final/map.html  
 
 
 ##### What is this application for?
