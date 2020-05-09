@@ -2,6 +2,8 @@
 ### Ziqun Li
 ### Final project for MUSA-611 JavaScript
 
+![image](https://raw.githubusercontent.com/liziqun/Js_Final/master/img/app.png)
+
 ##### What is this application for?
 This project seeks to evaluate the urban space value for both the urban planner and property developer, and provide a basis for facility site selection. By using this app, it is possible for the users to find the specific area where certain type of facility are concentrated, and reasonably judge the value of real estate investment.
 
@@ -14,4 +16,4 @@ Firstly, we download the Shanghai boundary data and POI data from both baidu api
 ##### Technologies 
 mapbox, jquery, bootstrap, e-charts. etc
 
-![image](https://raw.githubusercontent.com/liziqun/Js_Final/master/img/app.png)
+
