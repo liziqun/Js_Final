@@ -2,7 +2,7 @@
 ### Ziqun Li
 #### Final project for MUSA-611 JavaScript  
   
-  
+To the website, please click:https://liziqun.github.io/Js_Final/map.html  
 
 ##### What is this application for?
 This project seeks to evaluate the urban space value for both the urban planner and property developer, and provide a basis for facility site selection. By using this app, it is possible for the users to find the specific area where certain type of facility are concentrated, and reasonably judge the value of real estate investment.
